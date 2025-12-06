@@ -70,3 +70,6 @@ htmlcov/
 
 # OS
 Thumbs.db
+
+# Backup directories
+backend */
