@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Dark theme colors */
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #12121a;
+  --bg-tertiary: #1a1a25;
+  --bg-card: #16161f;
+  --bg-elevated: #1e1e2a;
+  
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  
+  /* Default accent (orange) - overridden by JS */
+  --accent-color: #f97316;
+  --accent-gradient: from-orange-500 to-amber-500;
+  
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+  
+  scroll-behavior: smooth;
+}
+
+/* Accent color variants */
+[data-accent="orange"] { --accent-color: #f97316; }
+[data-accent="blue"] { --accent-color: #3b82f6; }
+[data-accent="purple"] { --accent-color: #8b5cf6; }
+[data-accent="pink"] { --accent-color: #ec4899; }
+[data-accent="green"] { --accent-color: #22c55e; }
+[data-accent="teal"] { --accent-color: #14b8a6; }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Custom scrollbar - minimal */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Utility classes */
+@layer utilities {
+  .text-accent {
+    color: var(--accent-color);
+  }
+  
+  .bg-accent {
+    background-color: var(--accent-color);
+  }
+  
+  .bg-accent\/10 {
+    background-color: color-mix(in srgb, var(--accent-color) 10%, transparent);
+  }
+  
+  .bg-accent\/20 {
+    background-color: color-mix(in srgb, var(--accent-color) 20%, transparent);
+  }
+  
+  .border-accent {
+    border-color: var(--accent-color);
+  }
+  
+  .border-accent\/50 {
+    border-color: color-mix(in srgb, var(--accent-color) 50%, transparent);
+  }
+  
+  .shadow-accent {
+    box-shadow: 0 4px 20px color-mix(in srgb, var(--accent-color) 30%, transparent);
+  }
+  
+  .ring-accent {
+    --tw-ring-color: var(--accent-color);
+  }
+}
+
+/* Button primary uses accent */
+.btn-primary {
+  @apply px-5 py-2.5 rounded-xl font-semibold text-white transition-all duration-200;
+  background: var(--accent-color);
+  box-shadow: 0 4px 15px color-mix(in srgb, var(--accent-color) 25%, transparent);
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-color) 35%, transparent);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* Input styles */
+.input-dark {
+  @apply w-full px-4 py-3 rounded-xl
+         bg-white/5 border border-white/10
+         text-white placeholder:text-white/30
+         transition-all duration-200
+         focus:outline-none focus:bg-white/10;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.input-dark:focus {
+  border-color: color-mix(in srgb, var(--accent-color) 50%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent-color) 15%, transparent);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* Safe areas */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Hide scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
